@@ -1,5 +1,5 @@
 <template>
-  <button class="qiu-button" :class="[isSize]">
+  <button class="qiu-button" :class="[isSize, theme]">
     <slot></slot>
   </button>
 </template>
