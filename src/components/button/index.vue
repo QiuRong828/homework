@@ -1,5 +1,5 @@
 <template>
-  <button class="qiu-button qiu-button-success">
+  <button class="qiu-button-primary" disabled is-round>
     <slot></slot>
   </button>
 </template>
@@ -42,5 +42,9 @@ export default {
   background-color: #f56c6c;
   border-color: #f56c6c;
   color: #fff;
+}
+.qiu-button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 </style>
