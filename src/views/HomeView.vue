@@ -1,9 +1,8 @@
 <template>
   <div class="home">
-    <qiuButton>默认按钮</qiuButton>
-    <qiuButton type="success">成功按钮</qiuButton>
-    <qiuButton type="danger" size="mini">危险按钮</qiuButton>
-    <qiuButton type="warning">警告按钮</qiuButton>
+    <qiuButton type="success" :loading="flag" @click="handleSubmit"
+      >成功按钮</qiuButton
+    >
   </div>
 </template>
 

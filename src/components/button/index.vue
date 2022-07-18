@@ -1,6 +1,8 @@
 <template>
-  <button class="qiu-button" :class="[isSize, theme]">
-    <slot></slot>
+  <button class="qiu-button" :class="[isSize, theme]" @click="change">
+    <slot>
+      <i v-if="loading" class="iconfont icon-loading"></i>
+    </slot>
   </button>
 </template>
 
@@ -19,6 +21,7 @@ export default {
     round: Boolean,
     border: Boolean,
     disabled: Boolean,
+    loading: Boolean,
   },
   computed: {
     theme() {
@@ -32,6 +35,11 @@ export default {
     },
     isSize() {
       return this.size ? `qiu-button-${this.size}` : "";
+    },
+  },
+  methods: {
+    change() {
+      this.$emit("click");
     },
   },
 };
@@ -113,5 +121,18 @@ export default {
  */
 .is-round {
   border-radius: 100px;
+}
+
+.icon-loading {
+  animation: loading 2s infinite linear;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
