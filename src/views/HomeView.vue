@@ -1,6 +1,11 @@
 <template>
   <div class="home">
-    <qiu-table :column="column" checkbox index></qiu-table>
+    <qiu-table :column="column" checkbox index>
+      <template v-slot:operation>
+        <el-button type="primary">编辑</el-button>
+        <qiu-button type="danger">删除</qiu-button>
+      </template>
+    </qiu-table>
   </div>
 </template>
 
@@ -22,11 +27,18 @@ export default {
         { label: "姓名", prop: "name" },
         { label: "地址", prop: "address" },
         { label: "性别", prop: "sex" },
+        {
+          label: "操作",
+          prop: "operation",
+          type: "slot",
+          slot_name: "operation",
+        },
       ],
     };
   },
   components: {
     qiuTable: () => import("../components/table/index.vue"),
+    qiuButton: () => import("../components/button/index.vue"),
   },
   methods: {},
 };

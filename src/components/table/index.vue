@@ -1,14 +1,17 @@
 <template>
   <div>
-    <el-table style="width: 100%" :data="tableData">
+    <el-table :data="tableData" style="width: 100%">
       <el-table-column
         v-if="index"
         label="序号"
         type="index"
         width="55"
       ></el-table-column>
-      <el-table-column v-if="checkbox" type="selection" width="55">
-      </el-table-column>
+      <el-table-column
+        v-if="checkbox"
+        type="selection"
+        width="55"
+      ></el-table-column>
       <template v-for="item in column">
         <el-table-column
           v-if="item.type === 'function'"
@@ -19,6 +22,17 @@
         >
           <template v-slot="scope">
             <div v-html="item.callback && item.callback(scope.row)"></div>
+          </template>
+        </el-table-column>
+        <el-table-column
+          v-if="item.type === 'slot'"
+          :key="item.prop"
+          :prop="item.prop"
+          :label="item.label"
+          :width="item.width"
+        >
+          <template v-slot="scope">
+            <slot :name="item.slot_name"></slot>
           </template>
         </el-table-column>
         <el-table-column
