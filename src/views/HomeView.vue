@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <qiu-table
+      ref="tabledemo"
       :column="column"
       checkbox
       index
@@ -50,6 +51,11 @@ export default {
   components: {
     qiuTable: () => import("../components/table/index.vue"),
     qiuButton: () => import("../components/button/index.vue"),
+  },
+  mounted() {
+    setTimeout(() => {
+      console.log(this.$refs.tabledemo.initRequestList());
+    }, 1000);
   },
   methods: {
     handleEdit(row) {

@@ -75,6 +75,7 @@ export default {
       type: Object,
       default: () => {},
     },
+    initRequest: Boolean,
   },
   data() {
     return {
@@ -82,7 +83,7 @@ export default {
     };
   },
   created() {
-    this.getTableList();
+    this.initRequest && this.getTableList();
   },
   methods: {
     async getTableList() {
@@ -106,6 +107,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    initRequestList() {
+      this.getTableList();
     },
   },
 };
