@@ -67,6 +67,14 @@ export default {
       type: String,
       default: "GET",
     },
+    data: {
+      type: Object,
+      default: () => {},
+    },
+    params: {
+      type: Object,
+      default: () => {},
+    },
   },
   data() {
     return {
@@ -83,10 +91,17 @@ export default {
         return false;
       }
       try {
-        const response = await this.$axios({
+        const requestData = {
           url: this.url,
           method: this.method,
-        });
+        };
+        if (this.data) {
+          requestData.data = this.data;
+        }
+        if (this.params) {
+          requestData.params = this.params;
+        }
+        const response = await this.$axios(requestData);
         this.tableData = response.data.data;
       } catch (error) {
         console.log(error);

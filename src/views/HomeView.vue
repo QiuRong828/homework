@@ -1,7 +1,15 @@
 <template>
   <div class="home">
-    <qiu-table :column="column" checkbox index url="/name/" method="GET">
-      <template v-slot:operation>
+    <qiu-table
+      :column="column"
+      checkbox
+      index
+      url="/name/"
+      method="POST"
+      :data="data_1"
+      :params="params_1"
+    >
+      <template v-slot:operation="slot">
         <el-button type="primary" @click="handleEdit(slot.data)"
           >编辑</el-button
         >
@@ -31,16 +39,12 @@ export default {
           prop: "operation",
         },
       ],
-      column_1: [
-        { label: "姓名", prop: "name" },
-        { label: "类型", prop: "type" },
-        {
-          label: "操作",
-          type: "slot",
-          slot_name: "operation",
-          prop: "operation",
-        },
-      ],
+      data_1: {
+        name: "jack",
+      },
+      params_1: {
+        name: "rose",
+      },
     };
   },
   components: {
