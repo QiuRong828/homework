@@ -76,6 +76,8 @@ export default {
       default: () => {},
     },
     initRequest: Boolean,
+    onLoad: Boolean,
+    format: Function,
   },
   data() {
     return {
@@ -99,16 +101,26 @@ export default {
         if (this.data) {
           requestData.data = this.data;
         }
+
         if (this.params) {
           requestData.params = this.params;
         }
         const response = await this.$axios(requestData);
-        this.tableData = response.data.data;
-      } catch (error) {
-        console.log(error);
+        let data = response.data.data;
+        if (this.format && typeof this.format === "function") {
+          data = this.format(response.data);
+        }
+        this.tableData = data;
+
+        this.onLoad && this.$emit("onLoad", response.data);
+      } catch (e) {
+        console.log(e);
       }
     },
     initRequestList() {
+      this.getTableList();
+    },
+    handleRequest() {
       this.getTableList();
     },
   },

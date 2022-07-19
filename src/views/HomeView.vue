@@ -3,6 +3,9 @@
     <qiu-table
       ref="tabledemo"
       :column="column"
+      init-request
+      :format="formatData"
+      @onLoad="onLoad"
       checkbox
       index
       url="/name/"
@@ -63,6 +66,16 @@ export default {
     },
     handleDelete(row) {
       console.log(row);
+    },
+    onLoad(data) {
+      console.log(data);
+    },
+    formatData(data) {
+      const tableData = data.data;
+      tableData.forEach((item) => {
+        item.gender = item.gender === "男" ? 1 : 0;
+      });
+      return tableData;
     },
   },
 };
