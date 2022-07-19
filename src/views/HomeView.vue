@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <qiu-table :column="column" checkbox index>
+    <qiu-table :column="column" checkbox index url="/name/" method="GET">
       <template v-slot:operation>
         <el-button type="primary" @click="handleEdit(slot.data)"
           >编辑</el-button
@@ -19,26 +19,13 @@ export default {
   data() {
     return {
       column: [
-        {
-          label: "标题",
-          prop: "title",
-          type: "function",
-          callback: (row) => {
-            if (row.id === 1) {
-              return `<a href="https://www.baidu.com">${row.title}</a>`;
-            }
-            return `<span>${row.title}</span>`;
-          },
-        },
-        { label: "日期", prop: "date" },
         { label: "姓名", prop: "name" },
-        { label: "地址", prop: "address" },
-        { label: "性别", prop: "sex" },
+        { label: "性别", prop: "gender" },
         {
           label: "操作",
-          prop: "operation",
           type: "slot",
           slot_name: "operation",
+          prop: "operation",
         },
       ],
     };

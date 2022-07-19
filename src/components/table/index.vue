@@ -58,6 +58,15 @@ export default {
     },
     checkbox: Boolean,
     index: Boolean,
+    url: {
+      type: String,
+      default: "",
+      required: true,
+    },
+    method: {
+      type: String,
+      default: "GET",
+    },
   },
   data() {
     return {
@@ -69,11 +78,19 @@ export default {
   },
   methods: {
     async getTableList() {
-      const response = await this.$axios({
-        url: "/name/",
-        method: "GET",
-      });
-      this.tableData = response.data.data;
+      if (!this.url) {
+        throw new Error("url is required");
+        return false;
+      }
+      try {
+        const response = await this.$axios({
+          url: this.url,
+          method: this.method,
+        });
+        this.tableData = response.data.data;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
