@@ -2,8 +2,12 @@
   <div class="home">
     <qiu-table :column="column" checkbox index>
       <template v-slot:operation>
-        <el-button type="primary">编辑</el-button>
-        <qiu-button type="danger">删除</qiu-button>
+        <el-button type="primary" @click="handleEdit(slot.data)"
+          >编辑</el-button
+        >
+        <qiu-button type="danger" @click="handleDelete(slot.data)"
+          >删除</qiu-button
+        >
       </template>
     </qiu-table>
   </div>
@@ -16,14 +20,17 @@ export default {
     return {
       column: [
         {
-          label: "URL地址",
+          label: "标题",
+          prop: "title",
           type: "function",
-          prop: "date",
-          callback: (data) => {
-            return `<a href="https://www.baidu.com">${data.name}</a>`;
+          callback: (row) => {
+            if (row.id === 1) {
+              return `<a href="https://www.baidu.com">${row.title}</a>`;
+            }
+            return `<span>${row.title}</span>`;
           },
         },
-        // { label: "日期", prop: "date", width: 500 },
+        { label: "日期", prop: "date" },
         { label: "姓名", prop: "name" },
         { label: "地址", prop: "address" },
         { label: "性别", prop: "sex" },
@@ -40,6 +47,13 @@ export default {
     qiuTable: () => import("../components/table/index.vue"),
     qiuButton: () => import("../components/button/index.vue"),
   },
-  methods: {},
+  methods: {
+    handleEdit(row) {
+      console.log(row);
+    },
+    handleDelete(row) {
+      console.log(row);
+    },
+  },
 };
 </script>
