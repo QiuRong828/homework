@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <qiuButton type="success" :loading="flag" @click="handleSubmit"
-      >成功按钮</qiuButton
-    >
+    <qiu-table></qiu-table>
   </div>
 </template>
 
@@ -10,21 +8,11 @@
 export default {
   name: "HomeView",
   data() {
-    return {
-      flag: false,
-    };
+    return {};
   },
   components: {
-    qiuButton: () => import("../components/button/index.vue"),
+    qiuTable: () => import("../components/table/index.vue"),
   },
-  methods: {
-    handleSubmit() {
-      this.flag = true;
-      setTimeout(() => {
-        console.log("123");
-        this.flag = false;
-      }, 3000);
-    },
-  },
+  methods: {},
 };
 </script>
