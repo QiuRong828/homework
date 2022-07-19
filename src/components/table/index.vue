@@ -2,10 +2,19 @@
   <div>
     <el-table style="width: 100%" :data="tableData">
       <el-table-column
+        v-if="index"
+        label="序号"
+        type="index"
+        width="55"
+      ></el-table-column>
+      <el-table-column v-if="checkbox" type="selection" width="55">
+      </el-table-column>
+      <el-table-column
         v-for="item in column"
         :key="item.prop"
         :prop="item.prop"
         :label="item.label"
+        :width="item.width"
       ></el-table-column>
     </el-table>
   </div>
@@ -18,6 +27,8 @@ export default {
       type: Array,
       default: () => [],
     },
+    checkbox: Boolean,
+    index: Boolean,
   },
   data() {
     return {
