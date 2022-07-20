@@ -1,6 +1,10 @@
 <template>
   <div>
-    <el-table :data="tableData" style="width: 100%">
+    <el-table
+      :data="tableData"
+      style="width: 100%"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column
         v-if="index"
         label="序号"
@@ -52,6 +56,10 @@
 <script>
 export default {
   props: {
+    checkList: {
+      type: Array,
+      default: () => [],
+    },
     column: {
       type: Array,
       default: () => [],
@@ -88,6 +96,11 @@ export default {
     this.initRequest && this.getTableList();
   },
   methods: {
+    // 复选框回调
+    handleSelectionChange(val) {
+      console.log(val);
+      this.$emit("update:checkList", val);
+    },
     async getTableList() {
       if (!this.url) {
         throw new Error("url is required");
@@ -117,9 +130,9 @@ export default {
         console.log(e);
       }
     },
-    initRequestList() {
-      this.getTableList();
-    },
+    // initRequestList() {
+    //   this.getTableList();
+    // },
     handleRequest() {
       this.getTableList();
     },

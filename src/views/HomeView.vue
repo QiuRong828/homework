@@ -1,6 +1,8 @@
 <template>
   <div class="home">
+    <el-button @click="getCheckList">数据测试</el-button>
     <qiu-table
+      :check-list.sync="check_list"
       ref="tabledemo"
       :column="column"
       init-request
@@ -22,9 +24,6 @@
         >
       </template>
     </qiu-table>
-
-    <qiu-table :column="column_1" index checkbox url="/fruit/" method="GET">
-    </qiu-table>
   </div>
 </template>
 
@@ -36,6 +35,7 @@ export default {
       column: [
         { label: "姓名", prop: "name" },
         { label: "性别", prop: "gender" },
+        { label: "创建时间", prop: "create_date" },
         {
           label: "操作",
           type: "slot",
@@ -49,18 +49,24 @@ export default {
       params_1: {
         name: "rose",
       },
+      check_list: [],
     };
+  },
+  watch: {
+    check_list: {
+      handler(value) {
+        console.log(value);
+      },
+    },
   },
   components: {
     qiuTable: () => import("../components/table/index.vue"),
     qiuButton: () => import("../components/button/index.vue"),
   },
-  mounted() {
-    setTimeout(() => {
-      console.log(this.$refs.tabledemo.initRequestList());
-    }, 1000);
-  },
   methods: {
+    getCheckList() {
+      console.log(this.check_list);
+    },
     handleEdit(row) {
       console.log(row);
     },
