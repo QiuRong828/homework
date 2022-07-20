@@ -2,18 +2,16 @@
   <div class="home">
     <el-button @click="getCheckList">数据测试</el-button>
     <qiu-table
-      :check-list.sync="check_list"
-      ref="tabledemo"
-      :column="column"
       init-request
-      :format="formatData"
+      :check-list.sync="check_list"
       @onLoad="onLoad"
-      checkbox
+      :column="column"
       index
-      url="/name/"
-      method="POST"
+      checkbox
       :data="data_1"
       :params="params_1"
+      url="/name/"
+      method="post"
     >
       <template v-slot:operation="slot">
         <el-button type="primary" @click="handleEdit(slot.data)"
@@ -29,12 +27,12 @@
 
 <script>
 export default {
-  name: "HomeView",
+  name: "Home",
   data() {
     return {
       column: [
-        { label: "姓名", prop: "name" },
-        { label: "性别", prop: "gender" },
+        { label: "姓名", prop: "name", sort: "custorm", sort_by: "aaa" },
+        { label: "性别", prop: "gender", sort: "custorm" },
         { label: "创建时间", prop: "create_date" },
         {
           label: "操作",
@@ -60,8 +58,8 @@ export default {
     },
   },
   components: {
-    qiuTable: () => import("../components/table/index.vue"),
     qiuButton: () => import("../components/button/index.vue"),
+    qiuTable: () => import("../components/table/index.vue"),
   },
   methods: {
     getCheckList() {

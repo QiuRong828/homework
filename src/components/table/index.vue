@@ -4,6 +4,7 @@
       :data="tableData"
       style="width: 100%"
       @selection-change="handleSelectionChange"
+      @sort-change="sortChange"
     >
       <el-table-column
         v-if="index"
@@ -18,6 +19,8 @@
       ></el-table-column>
       <template v-for="(item, index) in column">
         <el-table-column
+          :sort-by="item.sort_by"
+          :sortable="item.sort"
           v-if="item.type === 'function'"
           :key="index"
           :prop="item.prop"
@@ -31,6 +34,8 @@
           </template>
         </el-table-column>
         <el-table-column
+          :sort-by="item.sort_by"
+          :sortable="item.sort"
           v-if="item.type === 'slot'"
           :key="index"
           :prop="item.prop"
@@ -42,6 +47,8 @@
           </template>
         </el-table-column>
         <el-table-column
+          :sort-by="item.sort_by"
+          :sortable="item.sort"
           v-else
           :key="index"
           :prop="item.prop"
@@ -55,6 +62,7 @@
 
 <script>
 export default {
+  name: "yangTable",
   props: {
     checkList: {
       type: Array,
@@ -96,6 +104,12 @@ export default {
     this.initRequest && this.getTableList();
   },
   methods: {
+    // 远程排序
+    sortChange({ column, prop, order }) {
+      console.log(column);
+      const sort_by = column.sortBy;
+      console.log(sort_by, order);
+    },
     // 复选框回调
     handleSelectionChange(val) {
       console.log(val);
@@ -130,9 +144,6 @@ export default {
         console.log(e);
       }
     },
-    // initRequestList() {
-    //   this.getTableList();
-    // },
     handleRequest() {
       this.getTableList();
     },
@@ -140,4 +151,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
