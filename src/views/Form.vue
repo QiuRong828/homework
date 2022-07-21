@@ -1,6 +1,6 @@
 <template>
   <div>
-    <qiuForm :item="formItem" :field="formField"></qiuForm>
+    <qiuForm :item="formItem" :field="formField" :button="formButton"></qiuForm>
   </div>
 </template>
 
@@ -9,6 +9,11 @@ export default {
   name: "Form",
   data() {
     return {
+      formButton: [
+        { label: "提交", key: "submit", type: "primary", size: "mini" },
+        { label: "取消", key: "cancel", type: "danger", size: "mini" },
+        { label: "下一个", key: "next", type: "success" },
+      ],
       formItem: [
         {
           label: "手机号",

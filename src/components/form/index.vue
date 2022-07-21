@@ -21,6 +21,11 @@
           <el-select v-model="field[item.prop]"></el-select>
         </el-form-item>
       </template>
+      <el-form-item>
+        <el-button v-for="item in button" v-bind="item" :key="item.key">{{
+          item.label
+        }}</el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -41,6 +46,10 @@ export default {
     rules: {
       type: Object,
       default: () => ({}),
+    },
+    button: {
+      type: Array,
+      default: () => [],
     },
   },
   data() {
