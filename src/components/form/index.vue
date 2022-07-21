@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import Rules from "./createRules";
 export default {
   name: "index",
   props: {

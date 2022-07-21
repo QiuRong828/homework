@@ -6,42 +6,43 @@
 
 <script>
 export default {
-  components: {
-    qiuForm: () => import("../components/form/index.vue"),
-  },
+  name: "Form",
   data() {
     return {
       formItem: [
         {
           type: "input",
-          label: "姓名",
           prop: "name",
+          label: "姓名",
+          required: true,
           rules: [
-            {
-              required: true,
-              message: "必填",
-            },
+            { min: 3, max: 10, message: "请输入3~10个字符", trigger: "blur" },
           ],
         },
         {
           type: "select",
-          label: "性别",
           prop: "gender",
-          rules: [
-            {
-              required: true,
-              message: "必填",
-            },
-          ],
+          label: "性别",
+          required: true,
+        },
+        {
+          type: "input",
+          prop: "sex",
+          label: "年龄",
+          required: true,
         },
       ],
       formField: {
         name: "",
         gender: "",
+        age: "",
       },
     };
+  },
+  components: {
+    qiuForm: () => import("../components/form/index"),
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
