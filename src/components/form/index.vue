@@ -1,12 +1,13 @@
 <template>
   <div class="form-container">
-    <el-form ref="form" :model="field" label-width="80px" :rules="rules">
+    <el-form ref="form" :model="field" label-width="80px">
       <template v-for="item in formItem">
         <el-form-item
           v-if="item.type === 'input'"
           :key="item.label"
           :label="item.label"
           :prop="item.prop"
+          :rules="item.rules"
         >
           <el-input v-model="field[item.prop]"></el-input>
         </el-form-item>
@@ -15,6 +16,7 @@
           :key="item.label"
           :label="item.label"
           :prop="item.prop"
+          :rules="item.rules"
         >
           <el-select v-model="field[item.prop]"></el-select>
         </el-form-item>

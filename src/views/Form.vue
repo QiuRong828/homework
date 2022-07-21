@@ -1,6 +1,6 @@
 <template>
   <div>
-    <qiuForm :item="formItem" :field="formField" :rules="formRules"></qiuForm>
+    <qiuForm :item="formItem" :field="formField"></qiuForm>
   </div>
 </template>
 
@@ -16,30 +16,28 @@ export default {
           type: "input",
           label: "姓名",
           prop: "name",
+          rules: [
+            {
+              required: true,
+              message: "必填",
+            },
+          ],
         },
         {
           type: "select",
           label: "性别",
           prop: "gender",
+          rules: [
+            {
+              required: true,
+              message: "必填",
+            },
+          ],
         },
       ],
       formField: {
         name: "",
         gender: "",
-      },
-      formRules: {
-        name: [
-          {
-            required: true,
-            message: "必填",
-          },
-        ],
-        gender: [
-          {
-            required: true,
-            message: "必填",
-          },
-        ],
       },
     };
   },
