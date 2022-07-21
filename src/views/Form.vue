@@ -10,9 +10,9 @@ export default {
   data() {
     return {
       formButton: [
-        { label: "提交", key: "submit", type: "primary", size: "mini" },
-        { label: "取消", key: "cancel", type: "danger", size: "mini" },
-        { label: "下一个", key: "next", type: "success" },
+        { label: "提交", key: "submit", type: "primary" },
+        { label: "重置", key: "cancel", type: "danger" },
+        { label: "下一步", key: "next", type: "success" },
       ],
       formItem: [
         {
