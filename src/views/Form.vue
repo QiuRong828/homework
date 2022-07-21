@@ -8,42 +8,41 @@
 export default {
   name: "Form",
   data() {
-    const validateName = (rules, value, callback) => {
-      if (value && value !== "10") {
-        callback(new Error("请输入10"));
-      } else {
-        callback();
-      }
-    };
     return {
       formItem: [
         {
+          label: "手机号",
           type: "input",
-          prop: "name",
-          label: "姓名",
-          required: true,
-          rules: [
-            { min: 3, max: 10, message: "请输入3~10个字符", trigger: "blur" },
-            { validator: validateName, trigger: "blurt" },
-          ],
-        },
-        {
-          type: "select",
-          prop: "gender",
-          label: "性别",
+          valueType: "phone",
+          prop: "phone",
           required: true,
         },
         {
+          label: "密码",
           type: "input",
-          prop: "sex",
+          valueType: "password",
+          prop: "password",
+          required: true,
+        },
+        {
+          label: "邮箱",
+          type: "input",
+          valueType: "email",
+          prop: "email",
+          required: true,
+        },
+        {
           label: "年龄",
+          type: "select",
+          prop: "age",
           required: true,
         },
       ],
       formField: {
-        name: "",
-        gender: "",
+        phone: "",
+        password: "",
         age: "",
+        email: "",
       },
     };
   },

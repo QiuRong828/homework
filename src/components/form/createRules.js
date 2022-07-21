@@ -2,18 +2,58 @@ const createRules = (data) => {
   data.forEach((item) => {
     let rulesArray = [];
     if (item.required) {
-      const rule = {
+      const rules = {
         required: true,
         message: item.message || createMessage(item),
       };
+      rulesArray.push(rules);
+    }
+
+    // 校验手机号
+    if (item.valueType && item.valueType === "phone") {
+      const regPhone = /^1[3456789]\d{9}$/;
+      const validatePhone = (rule, value, callback) => {
+        if (value && regPhone.test(value)) {
+          callback();
+        } else {
+          callback(new Error("请输入合法的手机号码"));
+        }
+      };
+      const rule = { validator: validatePhone, trigger: "change" };
       rulesArray.push(rule);
     }
 
-    // 判断是否有额外的校验规则
+    // 校验密码
+    if (item.valueType && item.valueType === "password") {
+      const resPass = /^[a-zA-Z0-9]{6,18}$/;
+
+      const validatePass = (rule, value, callback) => {
+        return resPass.test(value);
+      };
+
+      const rule = { validator: validatePass, trigger: "change" };
+      rulesArray.push(rule);
+    }
+
+    // 校验邮箱
+    if (item.valueType && item.valueType === "email") {
+      const regEmail = /1/;
+
+      const validateEmail = (rule, value, callback) => {
+        if (regEmail.test(value)) {
+          callback();
+        } else {
+          callback(new Error("请输入合法的邮箱地址"));
+        }
+      };
+
+      const rule = { validator: validateEmail, trigger: "change" };
+      rulesArray.push(rule);
+    }
+
     if (item.rules && Array.isArray(item.rules) && item.rules.length > 0) {
       rulesArray = rulesArray.concat(item.rules);
     }
-
     item.rules = rulesArray;
   });
   return data;
