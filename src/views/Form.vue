@@ -1,6 +1,6 @@
 <template>
   <div>
-    <qiuForm :item="formItem"></qiuForm>
+    <qiuForm :item="formItem" :field="formField"></qiuForm>
   </div>
 </template>
 
@@ -14,13 +14,19 @@ export default {
       formItem: [
         {
           type: "input",
-          label: "活动名称",
+          label: "姓名",
+          prop: "name",
         },
         {
           type: "select",
-          label: "活动区域",
+          label: "性别",
+          prop: "gender",
         },
       ],
+      formField: {
+        name: "",
+        gender: "",
+      },
     };
   },
 };

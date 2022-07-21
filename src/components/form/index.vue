@@ -1,13 +1,22 @@
 <template>
   <div class="form-container">
     <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item
-        v-for="item in formItem"
-        :key="item.label"
-        :label="item.label"
-      >
-        <el-input v-model="form.name"></el-input>
-      </el-form-item>
+      <template v-for="item in formItem">
+        <el-form-item
+          v-if="item.type === 'input'"
+          :key="item.label"
+          :label="item.label"
+        >
+          <el-input v-model="field[item.prop]"></el-input>
+        </el-form-item>
+        <el-form-item
+          v-if="item.type === 'select'"
+          :key="item.label"
+          :label="item.label"
+        >
+          <el-select v-model="field[item.prop]"></el-select>
+        </el-form-item>
+      </template>
     </el-form>
   </div>
 </template>
@@ -19,6 +28,10 @@ export default {
     item: {
       type: Array,
       default: () => [],
+    },
+    field: {
+      type: Object,
+      default: () => ({}),
     },
   },
   data() {
