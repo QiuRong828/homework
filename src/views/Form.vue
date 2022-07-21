@@ -8,6 +8,13 @@
 export default {
   name: "Form",
   data() {
+    const validateName = (rules, value, callback) => {
+      if (value && value !== "10") {
+        callback(new Error("请输入10"));
+      } else {
+        callback();
+      }
+    };
     return {
       formItem: [
         {
@@ -17,6 +24,7 @@ export default {
           required: true,
           rules: [
             { min: 3, max: 10, message: "请输入3~10个字符", trigger: "blur" },
+            { validator: validateName, trigger: "blurt" },
           ],
         },
         {
