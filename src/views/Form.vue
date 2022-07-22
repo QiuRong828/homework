@@ -54,6 +54,7 @@ export default {
   components: {
     qiuForm: () => import("../components/form/index"),
   },
+  methods: {},
 };
 </script>
 

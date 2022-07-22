@@ -24,6 +24,7 @@
       <el-button
         @click="handleButton(item)"
         v-for="item in button"
+        :loading="item.loading"
         v-bind="item"
         :key="item.key"
         >{{ item.label }}</el-button
@@ -33,7 +34,7 @@
 </template>
 
 <script>
-import Rules from "./createRules";
+import createRules from "./createRules";
 export default {
   name: "index",
   props: {
@@ -79,12 +80,14 @@ export default {
         }
       });
     },
+    // 重置
     handleCancel(item) {
-      console.log("表单重置");
+      this.$refs.form.resetFields();
+      item.callback && item.callback();
     },
   },
   beforeMount() {
-    this.formItem = this.item;
+    this.formItem = createRules(this.item);
   },
 };
 </script>
