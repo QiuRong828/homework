@@ -1,6 +1,11 @@
 <template>
   <div>
-    <qiuForm :item="formItem" :field="formField" :button="formButton"></qiuForm>
+    <qiuForm
+      :item="formItem"
+      :field="formField"
+      :button="formButton"
+      :before-submit="handleBeforeSubmit"
+    ></qiuForm>
   </div>
 </template>
 
@@ -51,9 +56,14 @@ export default {
           type: "select",
           prop: "class_room1",
           required: true,
-          url: "/api/classname/",
+          url: "/classroom/",
           method: "get",
           initRequest: true,
+          props: {
+            label: "class_name",
+            value: "id",
+          },
+          fetchSearch: true,
         },
       ],
       formField: {
