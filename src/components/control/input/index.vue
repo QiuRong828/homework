@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-input v-model="val"></el-input>
+    <el-input v-model="val" @input="handleInputEvent"></el-input>
   </div>
 </template>
 
@@ -23,6 +23,11 @@ export default {
         this.val = newValue;
       },
       Immediate: true,
+    },
+  },
+  methods: {
+    handleInputEvent() {
+      this.$emit("update:value", this.val);
     },
   },
 };
