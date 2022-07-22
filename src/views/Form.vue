@@ -1,6 +1,11 @@
 <template>
   <div>
-    <qiuForm :item="formItem" :field="formField" :button="formButton"></qiuForm>
+    <qiuForm
+      :item="formItem"
+      :field="formField"
+      :button="formButton"
+      :before-submit="submitForm"
+    ></qiuForm>
   </div>
 </template>
 
@@ -18,33 +23,33 @@ export default {
         {
           label: "手机号",
           type: "input",
-          valueType: "phone",
+          // valueType: "phone",
           prop: "phone",
-          required: true,
+          // required: true,
         },
         {
           label: "密码",
           type: "input",
-          valueType: "password",
+          // valueType: "password",
           prop: "password",
-          required: true,
+          // required: true,
         },
         {
           label: "邮箱",
           type: "input",
-          valueType: "email",
+          // valueType: "email",
           prop: "email",
-          required: true,
+          // required: true,
         },
         {
           label: "年龄",
           type: "select",
           prop: "age",
-          required: true,
+          // required: true,
         },
       ],
       formField: {
-        phone: "",
+        phone: "17802901987",
         password: "",
         age: "",
         email: "",
@@ -54,7 +59,15 @@ export default {
   components: {
     qiuForm: () => import("../components/form/index"),
   },
-  methods: {},
+  methods: {
+    submitForm() {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve();
+        }, 2000);
+      });
+    },
+  },
 };
 </script>
 
