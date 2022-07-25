@@ -1,11 +1,6 @@
-/**
- * @author YangLing
- * @date 2022/7/25 09:47
- */
-
 export const props = {
   value: {
-    type: [String, Number, Array],
+    type: [String, Number, Array, Date],
     default: "",
   },
   config: {
@@ -15,6 +10,22 @@ export const props = {
 };
 
 export const mixin = {
+  watch: {
+    value: {
+      handler(newValue) {
+        this.val = newValue;
+      },
+      immediate: true,
+    },
+    config: {
+      handler(val) {
+        this.initOptions();
+        this.initProps();
+      },
+      immediate: true,
+      deep: true,
+    },
+  },
   data() {
     return {
       options: [],
@@ -33,22 +44,6 @@ export const mixin = {
     },
     initRequest() {
       return this.config?.initRequest;
-    },
-  },
-  watch: {
-    value: {
-      handler(newValue) {
-        this.val = newValue;
-      },
-      immediate: true,
-    },
-    config: {
-      handler(val) {
-        this.initOptions();
-        this.initProps();
-      },
-      immediate: true,
-      deep: true,
     },
   },
   methods: {

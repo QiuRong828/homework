@@ -6,24 +6,26 @@
 
 <script>
 export default {
+  name: "InputComponent",
   props: {
     value: {
       type: [String, Number],
       default: "",
     },
   },
+  watch: {
+    value: {
+      handler(newValue) {
+        console.log(newValue);
+        this.val = newValue;
+      },
+      immediate: true,
+    },
+  },
   data() {
     return {
       val: "",
     };
-  },
-  watch: {
-    value: {
-      handler(newValue) {
-        this.val = newValue;
-      },
-      Immediate: true,
-    },
   },
   methods: {
     handleInputEvent() {
@@ -33,4 +35,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

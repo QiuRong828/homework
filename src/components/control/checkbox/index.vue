@@ -14,7 +14,7 @@
 <script>
 import { props, mixin } from "../basis";
 export default {
-  name: "CheckboxComponent",
+  name: "CheckBoxComponent",
   mixins: [mixin],
   props: {
     ...props,
@@ -25,6 +25,7 @@ export default {
       val: "",
     };
   },
+  computed: {},
   methods: {},
 };
 </script>

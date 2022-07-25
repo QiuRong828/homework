@@ -2,14 +2,13 @@
   <el-form ref="form" :model="field" label-width="80px">
     <template v-for="item in formItem">
       <el-form-item
-        v-if="item.type === 'input'"
         :rules="item.rules"
         :key="item.label"
         :label="item.label"
         :prop="item.prop"
       >
         <component
-          :value="field[item.prop]"
+          :value.sync="field[item.prop]"
           :config="item"
           :is="!item.type ? 'com-text' : `com-${item.type}`"
         ></component>
@@ -18,8 +17,8 @@
     <el-form-item>
       <el-button
         @click="handleButton(item)"
-        v-for="item in button"
         :loading="item.loading"
+        v-for="item in button"
         v-bind="item"
         :key="item.key"
         >{{ item.label }}</el-button
@@ -37,9 +36,12 @@ files.keys().forEach((item) => {
   const name = key[1];
   modules[`com-${name}`] = files(item).default;
 });
+console.log(modules);
 export default {
-  name: "index",
-  components: { ...modules },
+  name: "QiuForm",
+  components: {
+    ...modules,
+  },
   props: {
     item: {
       type: Array,
@@ -62,9 +64,6 @@ export default {
   data() {
     return {
       formItem: [],
-      form: {
-        name: "",
-      },
     };
   },
   methods: {
@@ -80,23 +79,24 @@ export default {
     handleSubmit(item) {
       this.$refs.form.validate((valid) => {
         if (valid) {
+          this.$set(item, "loading", true);
           if (typeof this.beforeSubmit === "function") {
-            this.$set(item, "loading", true);
+            console.log("123");
             this.beforeSubmit()
               .then((response) => {
-                console.log("成功");
                 this.$set(item, "loading", false);
+                console.log("成功");
               })
-              .catch(() => {
+              .catch((eror) => {
                 console.log("失败");
                 this.$set(item, "loading", false);
               });
           }
+
           console.log("表单提交");
         }
       });
     },
-    // 重置
     handleCancel(item) {
       this.$refs.form.resetFields();
       item.callback && item.callback();
