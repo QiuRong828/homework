@@ -167,6 +167,7 @@ export default {
           label: "文件",
           type: "upload",
           prop: "file",
+          model: "card",
         },
       ],
       formField: {
