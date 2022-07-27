@@ -163,6 +163,11 @@ export default {
           url: "/classroom/",
           method: "GET",
         },
+        {
+          label: "文件",
+          type: "upload",
+          prop: "file",
+        },
       ],
       formField: {
         phone: "17802901987",
@@ -173,6 +178,7 @@ export default {
         car: 1,
         createDate: "",
         status: 0,
+        file: "",
       },
     };
   },
