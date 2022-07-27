@@ -164,10 +164,21 @@ export default {
           method: "GET",
         },
         {
-          label: "文件",
+          label: "文件上传",
           type: "upload",
           prop: "file",
           model: "card",
+          width: "60px",
+          height: "60px",
+          clear: false,
+          url: "/api/upload_single",
+          method: "POST",
+          multiple: true,
+          limit: 2,
+          maxSize: 1,
+          showFileList: false,
+          isRound: true,
+          // accept: '.jpg,.png,.gif'
         },
       ],
       formField: {
